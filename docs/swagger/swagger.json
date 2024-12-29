@@ -1,0 +1,98 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Auth Service API",
+        "contact": {}
+    },
+    "basePath": "/",
+    "paths": {
+        "/api/transaction/{hash}": {
+            "get": {
+                "description": "Get USDT transaction details",
+                "tags": [
+                    "transaction"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "\u003cbr\u003eERC20 USDT: \"0xec1d31abdcb80d24d0d823b35f93ed30c837d26364928e3b1b97b3c1cdd7fe69\", \u003cbr\u003eTRC20 USDT: \"d6d1cc1ab403bc0febfb69d7be0bd8bd2fc03e2a03c4e2bdfd74560bd66109be\"",
+                        "description": "Transaction Hash",
+                        "name": "hash",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetTransactionResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/wallet/{address}": {
+            "get": {
+                "description": "Get USDT balance",
+                "tags": [
+                    "wallet"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "\u003cbr\u003eERC20 USDT: \"0xe983fD1798689eee00c0Fb77e79B8f372DF41060\", \u003cbr\u003eTRC20 USDT: \"TLSrrT5DiF5TkWPffJVQNwKE7SrctRCcpD\"",
+                        "description": "Wallet Address",
+                        "name": "address",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.GetWalletResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.GetTransactionResp": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "string"
+                },
+                "from": {
+                    "type": "string"
+                },
+                "to": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.GetWalletResp": {
+            "type": "object",
+            "properties": {
+                "balance": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
